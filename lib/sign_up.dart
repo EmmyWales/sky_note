@@ -315,6 +315,7 @@ class _SignState extends State<Sign> {
             "uid": value.user!.uid,
             "email": _email.text,
             "fullname": _fname.text,
+            'notes': [],
             "password": _pword.text,
             "date_created": DateTime.now().toString(),
           }).then((v) {

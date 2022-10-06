@@ -25,11 +25,10 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print(_user);
     return MaterialApp(
       title: 'Sky Note',
       debugShowCheckedModeBanner: false,
-      // initialRoute: _user != null ? '/' : '/login',
+      initialRoute: _user != null ? '/home' : '/splash',
       routes: AppRoutes().routes,
     );
   }
