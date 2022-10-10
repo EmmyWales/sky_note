@@ -66,9 +66,9 @@ class _ViewTextsState extends State<ViewTexts> {
                       children: [
                         IconButton(
                           icon: const Icon(
-                            Icons.upload,
+                           Icons.file_upload_outlined,
                             size: 18,
-                            color: Colors.green,
+                            color: Color(0XFF545454),
                           ),
                           onPressed: () async {
                             User? user = FirebaseAuth.instance.currentUser;

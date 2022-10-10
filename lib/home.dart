@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -108,7 +107,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                     Visibility(
                                       visible: visi,
                                       child: IconButton(
-                                          onPressed: (() {}),
+                                        onPressed: () {
+                                          
+                                        },
+                                         
                                           icon: const Icon(Icons.delete)),
                                       // child: Checkbox(
                                       //     value: value,
@@ -200,36 +202,39 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Container(
-                                                          height: 120,
-                                                          width: 10,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            // color: colors[index],
-                                                            color: const Color(
-                                                                0XFF00AFEF),
-                                                            borderRadius: const BorderRadius
-                                                                    .only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        10),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        10)),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .withOpacity(
-                                                                        0.1),
-                                                                blurRadius:
-                                                                    12.0,
-                                                                offset:
-                                                                    const Offset(
-                                                                        4.0,
-                                                                        5.0),
-                                                              ),
-                                                            ],
+                                                        GestureDetector(
+                                                          
+                                                          child: Container(
+                                                            height: 120,
+                                                            width: 10,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              // color: colors[index],
+                                                              color: const Color(
+                                                                  0XFF00AFEF),
+                                                              borderRadius: const BorderRadius
+                                                                      .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          10),
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          10)),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .withOpacity(
+                                                                          0.1),
+                                                                  blurRadius:
+                                                                      12.0,
+                                                                  offset:
+                                                                      const Offset(
+                                                                          4.0,
+                                                                          5.0),
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
                                                         Expanded(
@@ -365,7 +370,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                     children: [
                                                                       Text(
                                                                         '${newNote[index]["date_created"]}',
-                                                                        style: TextStyle(
+                                                                        style: const TextStyle(
                                                                             fontSize:
                                                                                 11),
                                                                       ),
