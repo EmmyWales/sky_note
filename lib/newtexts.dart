@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sky_note/utils/colors.dart';
 
 class TextPage extends StatefulWidget {
@@ -66,14 +67,15 @@ class _TextPageState extends State<TextPage> {
                               widget.allNotes!.add({
                                 "note_title": _note.text,
                                 "note_content": _cont.text,
-                                "date_created": DateTime.now().toString(),
+                                "date_created":
+                                    DateFormat('MMMM d, yyy HH:mm').format(DateTime.now()),
                               });
                             });
 
                             await updateUser.update(
                                 {'notes': widget.allNotes}).then((value) {
                               Navigator.pop(context);
-                            // ignore: avoid_print
+                              // ignore: avoid_print
                             }).catchError((error) => print("Failed to save"));
                           },
                         ),

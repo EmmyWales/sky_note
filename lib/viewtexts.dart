@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sky_note/utils/colors.dart';
 
 class ViewTexts extends StatefulWidget {
@@ -66,7 +67,7 @@ class _ViewTextsState extends State<ViewTexts> {
                       children: [
                         IconButton(
                           icon: const Icon(
-                           Icons.file_upload_outlined,
+                            Icons.file_upload_outlined,
                             size: 18,
                             color: Color(0XFF545454),
                           ),
@@ -75,11 +76,13 @@ class _ViewTextsState extends State<ViewTexts> {
                             final updateUser = FirebaseFirestore.instance
                                 .collection('users')
                                 .doc(user!.uid);
+
                             setState(() {
                               widget.allNote[widget.index] = {
                                 "note_title": _note.text,
                                 "note_content": _cont.text,
-                                "date_created": DateTime.now().toString(),
+                                "date_created": DateFormat('MMMM d, yyy HH:mm')
+                                    .format(DateTime.now()),
                               };
                             });
 

@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,13 +24,42 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<int> _selectedId = [];
 
   List<Color> colors = [
-    Colors.red,
-    Colors.blue,
-    Colors.pink,
-    Colors.yellow,
-    Colors.purple,
-    Colors.black,
-    Colors.green,
+    const Color(0XFF00AFEF),
+    const Color(0XFF0018EF),
+    const Color(0XFFEF0081),
+    const Color(0XFF05EF00),
+    const Color(0XFFEF0000),
+    const Color(0XFFEFBA00),
+    const Color(0XFF0048BA),
+    const Color(0XFFB0BF1A),
+    const Color(0XFF7CB9E8),
+    const Color(0XFFB284BE),
+    const Color(0XFFDB2D43),
+    const Color(0XFF006B3C),
+    const Color(0XFFFFA6C9),
+    const Color(0XFFED9121),
+    const Color(0XFF6F4E37),
+    const Color(0XFFFF7F50),
+    const Color(0XFF58427C),
+    const Color(0XFF8C92AC),
+    const Color(0XFF996666),
+    const Color(0XFFFF7F50),
+    const Color(0XFFFFF8DC),
+    const Color(0XFF654321),
+    const Color(0XFF8B008B),
+    const Color(0XFF556B2F),
+    const Color(0XFF00CED1),
+    const Color(0XFF556B2F),
+    const Color(0XFF87421F),
+    const Color(0XFF9EFD38),
+    const Color(0XFFA67B5B),
+    const Color(0XFFFFFAF0),
+    const Color(0XFFEEDC82),
+    const Color(0XFF006400),
+    const Color(0XFF86608E),
+    const Color(0XFFC154C1),
+    const Color(0XFFE25822),
+    const Color(0XFFF88379),
   ];
 
   @override
@@ -107,10 +137,33 @@ class _MyHomePageState extends State<MyHomePage> {
                                     Visibility(
                                       visible: visi,
                                       child: IconButton(
-                                        onPressed: () {
-                                          
-                                        },
-                                         
+                                          onPressed: () async {
+                                            User? user = FirebaseAuth
+                                                .instance.currentUser;
+                                            final updateUser = FirebaseFirestore
+                                                .instance
+                                                .collection('users')
+                                                .doc(user!.uid);
+                                            for (var i in _selectedId) {
+                                              setState(() {
+                                                newNote.removeAt(i);
+                                              });
+                                            }
+
+                                            await updateUser.update({
+                                              'notes': newNote
+                                            }).then((value) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          const MyHomePage()));
+                                              snackBar('Deleted');
+                                            }).catchError((error) =>
+                                             
+                                                // ignore: invalid_return_type_for_catch_error
+                                                print("Failed to save"));
+                                          },
                                           icon: const Icon(Icons.delete)),
                                       // child: Checkbox(
                                       //     value: value,
@@ -203,15 +256,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     Row(
                                                       children: [
                                                         GestureDetector(
-                                                          
                                                           child: Container(
                                                             height: 120,
                                                             width: 10,
                                                             decoration:
                                                                 BoxDecoration(
                                                               // color: colors[index],
-                                                              color: const Color(
-                                                                  0XFF00AFEF),
+                                                              color:
+                                                                  colors[index],
                                                               borderRadius: const BorderRadius
                                                                       .only(
                                                                   topLeft: Radius
@@ -308,10 +360,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           PopupMenuItem(
                                                                             onTap:
                                                                                 () {
-                                                                              Navigator.push(
-                                                                                context,
-                                                                                MaterialPageRoute(builder: (_) => ViewTexts(index: index, allNote: newNote, title: newNote[index]['note_title'], content: newNote[index]['note_content'])),
-                                                                              );
+                                                                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                                                                Navigator.push(
+                                                                                  context,
+                                                                                  MaterialPageRoute(builder: (_) => ViewTexts(index: index, allNote: newNote, title: newNote[index]['note_title'], content: newNote[index]['note_content'])),
+                                                                                );
+                                                                              });
                                                                             },
                                                                             value:
                                                                                 1,
@@ -324,6 +378,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                             ),
                                                                           ),
                                                                           PopupMenuItem(
+                                                                            onTap:
+                                                                                () async {
+                                                                              User? user = FirebaseAuth.instance.currentUser;
+                                                                              final updateUser = FirebaseFirestore.instance.collection('users').doc(user!.uid);
+
+                                                                              setState(() {
+                                                                                newNote.removeAt(index);
+                                                                              });
+
+                                                                              await updateUser.update({
+                                                                                'notes': newNote
+                                                                              }).then((value) {
+                                                                                Navigator.pop(context);
+                                                                              // ignore: invalid_return_type_for_catch_error
+                                                                              }).catchError((error) => print("Failed to save"));
+                                                                            },
                                                                             value:
                                                                                 2,
                                                                             child:
@@ -366,7 +436,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                     height: 5,
                                                                   ),
                                                                   Row(
-                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
                                                                     children: [
                                                                       Text(
                                                                         '${newNote[index]["date_created"]}',
@@ -421,6 +493,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Something went wrong ${snapshot.data!} / ${snapshot.connectionState}'));
         }
       },
+    );
+  }
+
+  snackBar(String title) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(title),
+      ),
     );
   }
 }
