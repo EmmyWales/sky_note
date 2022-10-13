@@ -83,7 +83,7 @@ class _TextPageState extends State<TextPage> {
                     )),
               ),
               Container(
-                height: 600,
+                height: MediaQuery.of(context).size.height*0.8,
                 width: MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
                   color: Colors.white,

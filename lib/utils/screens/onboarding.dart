@@ -38,32 +38,35 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            
             Center(
               child: Column(
                 //crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
+                //mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Image.asset(
                     images[currentIndex],
                     height: 400,
                     width: 350,
                   ),
-                  const SizedBox(height: 80,),
-                  Container(
-                    height: 350,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40),
-                          topRight: Radius.circular(40)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                   const SizedBox(
+                    height: 80,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      height: 340,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(40),
+                            topRight: Radius.circular(40)),
+                      ),
                       child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: Column(
                           children: [
                             Row(
@@ -118,7 +121,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     },
                                     color: AppColor.primary,
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(40)),
+                                        borderRadius:
+                                            BorderRadius.circular(40)),
                                     child: Center(
                                       child: Row(
                                         mainAxisAlignment:
@@ -130,7 +134,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                                 : "Next",
                                             style: GoogleFonts.poppins(
                                                 textStyle: const TextStyle(
-                                                    fontWeight: FontWeight.w500,
+                                                    fontWeight:
+                                                        FontWeight.w500,
                                                     color: Color(0XFFFFFFFF),
                                                     fontSize: 16)),
                                           ),
@@ -160,8 +165,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                                   fontSize: 18,
                                                   color: Color.fromARGB(
                                                       255, 118, 114, 114),
-                                                  decoration:
-                                                      TextDecoration.underline),
+                                                  decoration: TextDecoration
+                                                      .underline),
                                             ))),
                               ],
                             ),
