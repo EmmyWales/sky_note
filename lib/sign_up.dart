@@ -142,8 +142,8 @@ class _SignState extends State<Sign> {
                               child: MaterialButton(
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                     handleRegister(_email.text, _pword.text);
-                                  //   Navigator.pushNamed(context, '/login');
+                                    handleRegister(_email.text, _pword.text);
+                                    //   Navigator.pushNamed(context, '/login');
                                   }
                                 },
                                 color: AppColor.primary,
@@ -316,7 +316,6 @@ class _SignState extends State<Sign> {
             "email": _email.text,
             "fullname": _fname.text,
             'notes': [],
-            "password": _pword.text,
             "date_created": DateTime.now().toString(),
           }).then((v) {
             stopLoading();

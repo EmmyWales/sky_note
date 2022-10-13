@@ -57,7 +57,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                      height: 340,
+                      height: 330,
                       width: MediaQuery.of(context).size.width,
                       decoration: const BoxDecoration(
                         color: Colors.white,
