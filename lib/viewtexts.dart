@@ -36,10 +36,10 @@ class _ViewTextsState extends State<ViewTexts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0XFFE0E0E0),
+      // backgroundColor: const Color(0XFFE0E0E0),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        foregroundColor: AppColor.txt,
+        // backgroundColor: Colors.black,
+        // foregroundColor: AppColor.txt,
         elevation: 0,
         centerTitle: false,
         title: const Text("Back"),
@@ -50,12 +50,16 @@ class _ViewTextsState extends State<ViewTexts> {
           child: Column(
             children: [
               TextFormField(
-                style: TextStyle(
+                cursorColor: AppColor.txt,
+                style: const TextStyle(
+                  
                     fontWeight: FontWeight.w900,
                     fontSize: 18,
-                    color: AppColor.txt),
+                    // color: AppColor.txt,
+                    ),
                 controller: _note,
                 decoration: InputDecoration(
+                  
                   border: InputBorder.none,
                   hintText: 'Add new note',
                   hintStyle: const TextStyle(
@@ -118,11 +122,12 @@ class _ViewTextsState extends State<ViewTexts> {
                 ),
               ),
               Container(
+                decoration: const BoxDecoration(),
                 height: 600,
                 width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                ),
+                // decoration: const BoxDecoration(
+                //   // color: Colors.white,
+                // ),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(

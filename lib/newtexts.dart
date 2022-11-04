@@ -24,10 +24,10 @@ class _TextPageState extends State<TextPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0XFFE0E0E0),
+      // backgroundColor: const Color(0XFFE0E0E0),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        foregroundColor: AppColor.txt,
+        // backgroundColor: Colors.black,
+        // foregroundColor: AppColor.txt,
         elevation: 0,
         centerTitle: false,
         title: const Text("Back"),
@@ -38,10 +38,12 @@ class _TextPageState extends State<TextPage> {
           child: Column(
             children: [
               TextFormField(
-                style: TextStyle(
+                 cursorColor: AppColor.txt,
+                style: const  TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 18,
-                    color: AppColor.txt),
+                    // color: AppColor.txt,
+                ),
                 controller: _note,
                 decoration: InputDecoration(
                     border: InputBorder.none,
@@ -83,11 +85,12 @@ class _TextPageState extends State<TextPage> {
                     )),
               ),
               Container(
+                decoration: const BoxDecoration(),
                 height: MediaQuery.of(context).size.height*0.8,
                 width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                ),
+                // decoration: const BoxDecoration(
+                //   // color: Colors.white,
+                // ),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Expanded(

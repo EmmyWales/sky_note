@@ -44,6 +44,7 @@ dependencies:
   firebase_auth: ^3.10.0
   cloud_firestore: 
   responsive_framework: ^0.2.0
+  hive_flutter: ^1.1.0
   
 
 dev_dependencies:

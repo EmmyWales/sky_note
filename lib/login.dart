@@ -24,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: WillPopScope(
         onWillPop: () async => false,
         child: SafeArea(
@@ -64,7 +65,8 @@ class _LoginPageState extends State<LoginPage> {
                               Text(
                                 "Sign in to continue",
                                 style: GoogleFonts.poppins(
-                                    textStyle: const TextStyle(
+                                    textStyle: TextStyle(
+                                        color: AppColor.txt,
                                         fontWeight: FontWeight.w400,
                                         fontSize: 14)),
                               ),
@@ -82,9 +84,21 @@ class _LoginPageState extends State<LoginPage> {
                                   color: AppColor.txt)),
                         ),
                         TextFormField(
+                          style: TextStyle(
+                            color: AppColor.txt,
+                            fontSize: 18,
+                          ),
                           controller: _email,
                           keyboardType: TextInputType.emailAddress,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: const InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                          ),
                           validator: (value) {
                             if (value!.length < 8) {
                               return "Enter a valid email";
@@ -108,9 +122,24 @@ class _LoginPageState extends State<LoginPage> {
                                   color: AppColor.txt)),
                         ),
                         TextFormField(
+                          style: TextStyle(
+                            color: AppColor.txt,
+                            fontSize: 18,
+                          ),
                           controller: _pword,
                           keyboardType: TextInputType.text,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: const InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                          ),
+                          //      decoration:  const InputDecoration(
+                          // border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black))
+                          // ),
                           obscureText: true,
                           validator: (value) {
                             if (value!.length < 8) {
@@ -151,7 +180,8 @@ class _LoginPageState extends State<LoginPage> {
                                     },
                                     color: AppColor.primary,
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10)),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     child: Text(
                                       "Login",
                                       style: GoogleFonts.poppins(
@@ -228,7 +258,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-    
   }
 
   Future<void> handleLogin(String email, String password) async {

@@ -19,6 +19,7 @@ class _ForgottenPasswordState extends State<ForgottenPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -102,9 +103,20 @@ class _ForgottenPasswordState extends State<ForgottenPassword> {
                       height: 10,
                     ),
                     TextFormField(
+                      style: TextStyle(
+                        color: AppColor.txt,
+                        fontSize: 18,
+                      ),
                       controller: _email,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(),
+                      decoration: const InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -190,7 +202,6 @@ class _ForgottenPasswordState extends State<ForgottenPassword> {
       snackBar('Password Reset Email sent');
     } on FirebaseAuthException catch (e) {
       print(e);
-      
     }
   }
 

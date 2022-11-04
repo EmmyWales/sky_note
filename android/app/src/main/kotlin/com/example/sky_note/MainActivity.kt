@@ -1,4 +1,4 @@
-package com.example.sky_note
+package com.emmanuel.sky_note
 
 import io.flutter.embedding.android.FlutterActivity
 

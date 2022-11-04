@@ -24,283 +24,332 @@ class _SignState extends State<Sign> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         body: SafeArea(
-      child: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Stack(
-              children: [
-                const SafeArea(
-                  child: Image(image: AssetImage("assets/backdrop.png")),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Stack(
                   children: [
-                    Center(
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 150,
-                          ),
-                          Image.asset(
-                            "assets/skynote.png",
-                          ),
-                          const SizedBox(height: 20),
-                          Text("Sign Up",
-                              style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
-                                    color: AppColor.txt,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 24),
-                              )),
-                        ],
-                      ),
+                    const SafeArea(
+                      child: Image(image: AssetImage("assets/backdrop.png")),
                     ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Text(
-                      "Fullname",
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.txt)),
-                    ),
-                    TextFormField(
-                      controller: _fname,
-                      keyboardType: TextInputType.name,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.length < 6) {
-                          return "Enter full name";
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "Email",
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.txt)),
-                    ),
-                    TextFormField(
-                      controller: _email,
-                      keyboardType: TextInputType.emailAddress,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.length < 8) {
-                          return "Enter a valid email";
-                        } else if (!value.contains('@')) {
-                          return "Email must contain '@'";
-                        } else if (!value.contains('.com')) {
-                          return "Email must contain .com";
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "Password",
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.txt)),
-                    ),
-                    TextFormField(
-                      controller: _pword,
-                      keyboardType: TextInputType.text,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      obscureText: true,
-                      validator: (value) {
-                        if (value!.length < 8) {
-                          return "Password must not be less than 8 caracters ";
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Center(
-                      child: _startloading
-                          ? const CircularProgressIndicator()
-                          : SizedBox(
-                              width: 440,
-                              height: 40,
-                              child: MaterialButton(
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    handleRegister(_email.text, _pword.text);
-                                    //   Navigator.pushNamed(context, '/login');
-                                  }
-                                },
-                                color: AppColor.primary,
-                                height: 50,
-                                minWidth: 360,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Text(
-                                  "Sign up",
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 150,
+                              ),
+                              Image.asset(
+                                "assets/skynote.png",
+                              ),
+                              const SizedBox(height: 20),
+                              Text("Sign Up",
                                   style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0XFFFFFFFF))),
+                                    textStyle: TextStyle(
+                                        color: AppColor.txt,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 24),
+                                  )),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        Text(
+                          "Fullname",
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.txt)),
+                        ),
+                        TextFormField(
+                          controller: _fname,
+                          keyboardType: TextInputType.name,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.length < 6) {
+                              return "Enter full name";
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration: const InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                          ),
+                          style: TextStyle(
+                            color: AppColor.txt,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Email",
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.txt)),
+                        ),
+                        TextFormField(
+                           style: TextStyle(
+                            color: AppColor.txt,
+                            fontSize: 18,
+                          ),
+                          decoration: const InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                          ),
+                          // decoration:  const InputDecoration(
+                          // border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black))
+                          // ),
+                          controller: _email,
+                          keyboardType: TextInputType.emailAddress,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.length < 8) {
+                              return "Enter a valid email";
+                            } else if (!value.contains('@')) {
+                              return "Email must contain '@'";
+                            } else if (!value.contains('.com')) {
+                              return "Email must contain .com";
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Password",
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.txt)),
+                        ),
+                        TextFormField(
+                           style: TextStyle(
+                            color: AppColor.txt,
+                            fontSize: 18,
+                          ),
+                          controller: _pword,
+                          keyboardType: TextInputType.text,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: true,
+                          decoration: const InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.length < 8) {
+                              return "Password must not be less than 8 caracters ";
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Center(
+                          child: _startloading
+                              ? const CircularProgressIndicator()
+                              : SizedBox(
+                                  width: 440,
+                                  height: 40,
+                                  child: MaterialButton(
+                                    onPressed: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        handleRegister(
+                                            _email.text, _pword.text);
+                                        //   Navigator.pushNamed(context, '/login');
+                                      }
+                                    },
+                                    color: AppColor.primary,
+                                    height: 50,
+                                    minWidth: 360,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Text(
+                                      "Sign up",
+                                      style: GoogleFonts.poppins(
+                                          textStyle: const TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              color: Color(0XFFFFFFFF))),
+                                    ),
+                                  ),
+                                ),
+                        ),
+                        // MaterialButton(
+                        //   onPressed: () {
+                        //     if (_formKey.currentState!.validate()) {
+                        //      Navigator.pushReplacementNamed(context, "/login");
+                        //     }
+                        //   },
+                        //   color: AppColor.primary,
+                        //   height: 50,
+                        //   minWidth: 360,
+                        //   shape: RoundedRectangleBorder(
+                        //       borderRadius: BorderRadius.circular(10)),
+                        //   child: Text(
+                        //     "Sign up",
+                        //     style: GoogleFonts.poppins(
+                        //         textStyle: const TextStyle(
+                        //             fontWeight: FontWeight.w500,
+                        //             color: Color(0XFFFFFFFF))),
+                        //   ),
+                        // ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                child: Container(
+                                    height: 33,
+                                    width: 56,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0XFFF1F1F1),
+                                      borderRadius: BorderRadius.circular(20),
+                                      // boxShadow: const [
+                                      //   BoxShadow(
+                                      //       color: Color(0XFFF1F1F1),
+                                      //       spreadRadius: 1,
+                                      //       blurRadius: 20.0)
+                                      // ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset("assets/google.png"),
+                                      ],
+                                    )),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              GestureDetector(
+                                child: Container(
+                                    height: 33,
+                                    width: 56,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0XFFF1F1F1),
+                                      borderRadius: BorderRadius.circular(20),
+                                      // boxShadow: const [
+                                      //   BoxShadow(
+                                      //       color: Color(0XFFF1F1F1),
+                                      //       spreadRadius: 1,
+                                      //       blurRadius: 20.0)
+                                      // ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset("assets/apple.png"),
+                                      ],
+                                    )),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              GestureDetector(
+                                child: Container(
+                                    height: 33,
+                                    width: 56,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0XFFF1F1F1),
+                                      borderRadius: BorderRadius.circular(20),
+                                      // boxShadow: const [
+                                      //   BoxShadow(
+                                      //       color: Color(0XFFF1F1F1),
+                                      //       spreadRadius: 1,
+                                      //       blurRadius: 20.0)
+                                      // ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset("assets/facebook.png"),
+                                      ],
+                                    )),
+                              )
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Already a user?",
+                                style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Color.fromARGB(255, 93, 89, 89)),
                                 ),
                               ),
-                            ),
-                    ),
-                    // MaterialButton(
-                    //   onPressed: () {
-                    //     if (_formKey.currentState!.validate()) {
-                    //      Navigator.pushReplacementNamed(context, "/login");
-                    //     }
-                    //   },
-                    //   color: AppColor.primary,
-                    //   height: 50,
-                    //   minWidth: 360,
-                    //   shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(10)),
-                    //   child: Text(
-                    //     "Sign up",
-                    //     style: GoogleFonts.poppins(
-                    //         textStyle: const TextStyle(
-                    //             fontWeight: FontWeight.w500,
-                    //             color: Color(0XFFFFFFFF))),
-                    //   ),
-                    // ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            child: Container(
-                                height: 33,
-                                width: 56,
-                                decoration: BoxDecoration(
-                                    color: const Color(0XFFF1F1F1),
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Color(0XFFF1F1F1),
-                                          spreadRadius: 1,
-                                          blurRadius: 20.0)
-                                    ]),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset("assets/google.png"),
-                                  ],
-                                )),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          GestureDetector(
-                            child: Container(
-                                height: 33,
-                                width: 56,
-                                decoration: BoxDecoration(
-                                    color: const Color(0XFFF1F1F1),
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Color(0XFFF1F1F1),
-                                          spreadRadius: 1,
-                                          blurRadius: 20.0)
-                                    ]),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset("assets/apple.png"),
-                                  ],
-                                )),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          GestureDetector(
-                            child: Container(
-                                height: 33,
-                                width: 56,
-                                decoration: BoxDecoration(
-                                    color: const Color(0XFFF1F1F1),
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Color(0XFFF1F1F1),
-                                          spreadRadius: 1,
-                                          blurRadius: 20.0)
-                                    ]),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset("assets/facebook.png"),
-                                  ],
-                                )),
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Already a user?",
-                            style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Color.fromARGB(255, 93, 89, 89)),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const LoginPage()));
-                            },
-                            child: Text(
-                              "Sign In",
-                              style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                  color: AppColor.primary,
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginPage()));
+                                },
+                                child: Text(
+                                  "Sign In",
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                      color: AppColor.primary,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
   Future<void> handleRegister(String email, String password) async {

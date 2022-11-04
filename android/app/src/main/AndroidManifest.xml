@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sky_note">
+    package="com.emmanuel.sky_note">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="sky_note"
         android:name="${applicationName}"

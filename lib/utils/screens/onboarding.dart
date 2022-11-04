@@ -36,6 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       backgroundColor: const Color(0XFF00AFEF),
       body: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
         child: Stack(
           children: [
             Center(
@@ -57,7 +58,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                      height: 330,
+                      height: 350,
                       width: MediaQuery.of(context).size.width,
                       decoration: const BoxDecoration(
                         color: Colors.white,
@@ -108,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Column(
                               children: [
                                 SizedBox(
-                                  width: 150,
+                                  width: 153,
                                   height: 40,
                                   child: MaterialButton(
                                     onPressed: () {

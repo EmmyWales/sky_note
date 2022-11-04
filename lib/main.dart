@@ -3,9 +3,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sky_note/home.dart';
 import 'package:sky_note/utils/screens/approutes.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('dark mode');
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -25,12 +29,24 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Sky Note',
-      debugShowCheckedModeBanner: false,
-      initialRoute: _user != null ? '/home' : '/splash',
-      routes: AppRoutes().routes,
-    );
+    return ValueListenableBuilder(
+        valueListenable: Hive.box('dark mode').listenable(),
+        builder: (context, Box box, child) {
+          bool getValue = box.get('dark mode', defaultValue: true);
+          return MaterialApp(
+            title: 'Sky Note',
+            themeMode: getValue ? ThemeMode.dark : ThemeMode.light,
+            darkTheme: ThemeData.dark(),
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              
+              appBarTheme: const AppBarTheme(color: Colors.white, foregroundColor: Colors.black ),
+            ),
+            //  AppBarTheme(color: Colors.white),
+            initialRoute: _user != null ? '/home' : '/splash',
+            routes: AppRoutes().routes,
+          );
+        });
   }
 }
 

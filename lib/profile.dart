@@ -62,7 +62,7 @@ class _ProfileState extends State<Profile> {
                       },
                     )),
                 child: Container(
-                    height: 80,
+                    height: 60,
                     width: MediaQuery.of(context).size.width,
                     color: AppColor.primary,
                     child: Row(
@@ -161,6 +161,36 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                               const SizedBox(height: 30),
+                              // ValueListenableBuilder(
+                              //     valueListenable:
+                              //         Hive.box('dark mode').listenable(),
+                              //     builder: (context, Box box, child) {
+                              //       bool getValue = box.get('dark mode',
+                              //           defaultValue: true);
+
+                              //       return Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         children: [
+                              //           Text(
+                              //             "Select Mode",
+                              //             style: GoogleFonts.nunito(
+                              //               textStyle: const TextStyle(
+                              //                   color: Color(0XFF083A50),
+                              //                   fontWeight: FontWeight.w700,
+                              //                   fontSize: 14),
+                              //             ),
+                              //           ),
+                              // Switch(
+                              //   activeColor: AppColor.primary,
+                              //   value: getValue,
+                              //   onChanged: (value) {
+                              //     box.put('dark mode', !getValue);
+                              //   },
+                              // ),
+                              //     ],
+                              //   );
+                              // }),
                             ],
                           ),
                         ),
