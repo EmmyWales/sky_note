@@ -61,7 +61,7 @@ class _ViewTextsState extends State<ViewTexts> {
                 decoration: InputDecoration(
                   
                   border: InputBorder.none,
-                  hintText: 'Add new note',
+                  hintText: 'Add Title',
                   hintStyle: const TextStyle(
                       color: Color(0XFF909090),
                       fontSize: 12,
