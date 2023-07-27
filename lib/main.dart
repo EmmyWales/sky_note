@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sky_note/home.dart';
 import 'package:sky_note/utils/screens/approutes.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:sky_note/utils/screens/splashscreen.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -11,9 +12,7 @@ Future<void> main() async {
   await Hive.openBox('dark mode');
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -39,12 +38,13 @@ class _MyAppState extends State<MyApp> {
             darkTheme: ThemeData.dark(),
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              
-              appBarTheme: const AppBarTheme(color: Colors.white, foregroundColor: Colors.black ),
+              appBarTheme: const AppBarTheme(
+                  color: Colors.white, foregroundColor: Colors.black),
             ),
             //  AppBarTheme(color: Colors.white),
             initialRoute: _user != null ? '/home' : '/splash',
             routes: AppRoutes().routes,
+            home: SplashScreen(),
           );
         });
   }

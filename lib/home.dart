@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,46 +26,86 @@ class _MyHomePageState extends State<MyHomePage> {
   bool value = false;
   bool visi = false;
   // int? _selected;
+  final TextEditingController _searchController = TextEditingController();
+  List<Map<String, dynamic>> _searchResults = [];
+
+  void _performSearch() async {
+    String query = _searchController.text.trim();
+
+    if (query.isNotEmpty) {
+      // Perform a query to Firestore to retrieve user data
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('notes',
+              arrayContains: query) // Modify this to suit your data structure
+          .get();
+
+      setState(() {
+        _searchResults = querySnapshot.docs
+            .map((doc) => doc.data())
+            .cast<Map<String, dynamic>>()
+            .toList();
+      });
+    } else {
+      setState(() {
+        _searchResults = [];
+      });
+    }
+  }
+
   final List<int> _selectedId = [];
 
-  List<Color> colors = [
-    const Color(0XFF00AFEF),
-    const Color(0XFF0018EF),
-    const Color(0XFFEF0081),
-    const Color(0XFF05EF00),
-    const Color(0XFFEF0000),
-    const Color(0XFFEFBA00),
-    const Color(0XFF0048BA),
-    const Color(0XFFB0BF1A),
-    const Color(0XFF7CB9E8),
-    const Color(0XFFB284BE),
-    const Color(0XFFDB2D43),
-    const Color(0XFF006B3C),
-    const Color(0XFFFFA6C9),
-    const Color(0XFFED9121),
-    const Color(0XFF6F4E37),
-    const Color(0XFFFF7F50),
-    const Color(0XFF58427C),
-    const Color(0XFF8C92AC),
-    const Color(0XFF996666),
-    const Color(0XFFFF7F50),
-    const Color(0XFFFFF8DC),
-    const Color(0XFF654321),
-    const Color(0XFF8B008B),
-    const Color(0XFF556B2F),
-    const Color(0XFF00CED1),
-    const Color(0XFF556B2F),
-    const Color(0XFF87421F),
-    const Color(0XFF9EFD38),
-    const Color(0XFFA67B5B),
-    const Color(0XFFFFFAF0),
-    const Color(0XFFEEDC82),
-    const Color(0XFF006400),
-    const Color(0XFF86608E),
-    const Color(0XFFC154C1),
-    const Color(0XFFE25822),
-    const Color(0XFFF88379),
-  ];
+  List<Color> generateRandomColors(int count) {
+    List<Color> colors = List.generate(count, (index) {
+      Random random = Random();
+      return Color.fromARGB(
+        255,
+        random.nextInt(256),
+        random.nextInt(256),
+        random.nextInt(256),
+      );
+    });
+    return colors;
+  }
+
+  // List<Color> colors = [
+  //   const Color(0XFF00AFEF),
+  //   const Color(0XFF0018EF),
+  //   const Color(0XFFEF0081),
+  //   const Color(0XFF05EF00),
+  //   const Color(0XFFEF0000),
+  //   const Color(0XFFEFBA00),
+  //   const Color(0XFF0048BA),
+  //   const Color(0XFFB0BF1A),
+  //   const Color(0XFF7CB9E8),
+  //   const Color(0XFFB284BE),
+  //   const Color(0XFFDB2D43),
+  //   const Color(0XFF006B3C),
+  //   const Color(0XFFFFA6C9),
+  //   const Color(0XFFED9121),
+  //   const Color(0XFF6F4E37),
+  //   const Color(0XFFFF7F50),
+  //   const Color(0XFF58427C),
+  //   const Color(0XFF8C92AC),
+  //   const Color(0XFF996666),
+  //   const Color(0XFFFF7F50),
+  //   const Color(0XFFFFF8DC),
+  //   const Color(0XFF654321),
+  //   const Color(0XFF8B008B),
+  //   const Color(0XFF556B2F),
+  //   const Color(0XFF00CED1),
+  //   const Color(0XFF556B2F),
+  //   const Color(0XFF87421F),
+  //   const Color(0XFF9EFD38),
+  //   const Color(0XFFA67B5B),
+  //   const Color(0XFFFFFAF0),
+  //   const Color(0XFFEEDC82),
+  //   const Color(0XFF006400),
+  //   const Color(0XFF86608E),
+  //   const Color(0XFFC154C1),
+  //   const Color(0XFFE25822),
+  //   const Color(0XFFF88379),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +115,15 @@ class _MyHomePageState extends State<MyHomePage> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
               body: Center(child: CircularProgressIndicator()));
+        } else if (snapshot.error == ConnectionState.none) {
+          return const Scaffold(
+              body: Center(child: CircularProgressIndicator()));
         } else if (snapshot.connectionState == ConnectionState.active) {
           List newNote = List.from(snapshot.data!['notes'].reversed);
           var spiltname = snapshot.data!['fullname'].split(' ');
+          print(snapshot.data);
+          print(newNote.length);
+
           return Scaffold(
             floatingActionButton: FloatingActionButton(
               backgroundColor: const Color(0XFF00AFEF),
@@ -178,7 +226,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       print("Failed to save"));
                                                 },
                                                 icon: const Icon(Icons.delete)),
-                                         
                                           ),
                                           IconButton(
                                             onPressed: () {
@@ -197,6 +244,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   const SizedBox(height: 15),
                                   TextFormField(
+                                    controller: _searchController,
+                                    onFieldSubmitted: (_) {
+                                      // Perform the search when the user presses Enter key
+                                      _performSearch();
+                                    },
                                     decoration: const InputDecoration(
                                         prefixIcon: Icon(
                                           Icons.search,
@@ -220,16 +272,38 @@ class _MyHomePageState extends State<MyHomePage> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(30.0)))),
                                   ),
+                                  // Expanded(
+                                  //   child: ListView.builder(
+                                  //     itemCount: _searchResults.length,
+                                  //     itemBuilder: (context, index) {
+                                  //       // Display the search results
+                                  //       return ListTile(
+                                  //         title: Text(_searchResults[index]
+                                  //             ['note_title']),
+                                  //         subtitle: Text(_searchResults[index]
+                                  //             ['note_content']),
+                                  //       );
+                                  //     },
+                                  //   ),
+                                  // ),
                                   const SizedBox(height: 20),
                                   newNote.isEmpty
                                       ? const Text(
                                           'You currently do not have any note, kindly click on the button below to add one.')
                                       : ListView.builder(
-                                          itemCount: newNote.length,
+                                          itemCount: newNote.length == 0
+                                              ? 1
+                                              : newNote.length,
                                           shrinkWrap: true,
                                           physics:
                                               const NeverScrollableScrollPhysics(),
                                           itemBuilder: (context, index) {
+                                            if (newNote.length == 0) {
+                                              return ListTile(
+                                                title:
+                                                    Text("No notes available"),
+                                              );
+                                            }
                                             return GestureDetector(
                                               onTap: () {
                                                 Navigator.push(
@@ -238,9 +312,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     builder: (_) => ViewTexts(
                                                         index: index,
                                                         allNote: newNote,
-                                                        title: newNote[index]
+                                                        title: newNote[index][1]
                                                             ['note_title'],
-                                                        content: newNote[index]
+                                                        content: newNote[index][1]
                                                             ['note_content']),
                                                   ),
                                                 );
@@ -283,8 +357,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                   width: 10,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    // color: colors[index],
-                                                                    color: colors[
+                                                                    color: generateRandomColors(
+                                                                            index)[
                                                                         index],
                                                                     borderRadius: const BorderRadius
                                                                             .only(
@@ -349,7 +423,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                           children: [
                                                                             Expanded(
                                                                               child: Text(
-                                                                                newNote[index]['note_title'],
+                                                                                newNote[index]['note_title'][0],
                                                                                 maxLines: 1,
                                                                                 style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
                                                                                 // color: AppColor.txt,
@@ -415,9 +489,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                                                               5,
                                                                         ),
                                                                         Text(
-                                                                          newNote[index]
+                                                                          newNote[index]['note_content']
                                                                               [
-                                                                              'note_content'],
+                                                                              0],
                                                                           maxLines:
                                                                               1,
                                                                           overflow:

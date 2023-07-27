@@ -105,7 +105,7 @@ class _SignState extends State<Sign> {
                                   color: AppColor.txt)),
                         ),
                         TextFormField(
-                           style: TextStyle(
+                          style: TextStyle(
                             color: AppColor.txt,
                             fontSize: 18,
                           ),
@@ -146,7 +146,7 @@ class _SignState extends State<Sign> {
                                   color: AppColor.txt)),
                         ),
                         TextFormField(
-                           style: TextStyle(
+                          style: TextStyle(
                             color: AppColor.txt,
                             fontSize: 18,
                           ),
@@ -154,7 +154,7 @@ class _SignState extends State<Sign> {
                           keyboardType: TextInputType.text,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           obscureText: true,
-                          decoration: const InputDecoration(
+                          decoration: const InputDecoration(  
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black),
                             ),
@@ -261,12 +261,6 @@ class _SignState extends State<Sign> {
                                     decoration: BoxDecoration(
                                       color: const Color(0XFFF1F1F1),
                                       borderRadius: BorderRadius.circular(20),
-                                      // boxShadow: const [
-                                      //   BoxShadow(
-                                      //       color: Color(0XFFF1F1F1),
-                                      //       spreadRadius: 1,
-                                      //       blurRadius: 20.0)
-                                      // ],
                                     ),
                                     child: Row(
                                       mainAxisAlignment:
@@ -323,10 +317,11 @@ class _SignState extends State<Sign> {
                               TextButton(
                                 onPressed: () {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const LoginPage()));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginPage(),
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   "Sign In",

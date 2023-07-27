@@ -52,14 +52,12 @@ class _ViewTextsState extends State<ViewTexts> {
               TextFormField(
                 cursorColor: AppColor.txt,
                 style: const TextStyle(
-                  
-                    fontWeight: FontWeight.w900,
-                    fontSize: 18,
-                    // color: AppColor.txt,
-                    ),
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                  // color: AppColor.txt,
+                ),
                 controller: _note,
                 decoration: InputDecoration(
-                  
                   border: InputBorder.none,
                   hintText: 'Add Title',
                   hintStyle: const TextStyle(
@@ -82,12 +80,13 @@ class _ViewTextsState extends State<ViewTexts> {
                                 .doc(user!.uid);
 
                             setState(() {
-                              widget.allNote[widget.index] = {
+                              var response = widget.allNote[widget.index] = {
                                 "note_title": _note.text,
                                 "note_content": _cont.text,
                                 "date_created": DateFormat('MMMM d, yyy HH:mm')
                                     .format(DateTime.now()),
                               };
+                              print(response);
                             });
 
                             await updateUser.update(

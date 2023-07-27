@@ -52,7 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     height: 400,
                     width: 350,
                   ),
-                   const SizedBox(
+                  const SizedBox(
                     height: 80,
                   ),
                   Align(
@@ -135,8 +135,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                                 : "Next",
                                             style: GoogleFonts.poppins(
                                                 textStyle: const TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.w500,
+                                                    fontWeight: FontWeight.w500,
                                                     color: Color(0XFFFFFFFF),
                                                     fontSize: 16)),
                                           ),
@@ -159,16 +158,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                         onPressed: () {
                                           setState(() => currentIndex = 2);
                                         },
-                                        child: Text("skip",
-                                            style: GoogleFonts.poppins(
-                                              textStyle: const TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 18,
-                                                  color: Color.fromARGB(
-                                                      255, 118, 114, 114),
-                                                  decoration: TextDecoration
-                                                      .underline),
-                                            ))),
+                                        child: Text(
+                                          "skip",
+                                          style: GoogleFonts.poppins(
+                                            textStyle: const TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 18,
+                                                color: Color.fromARGB(
+                                                    255, 118, 114, 114),
+                                                decoration:
+                                                    TextDecoration.underline),
+                                          ),
+                                        ),
+                                      ),
                               ],
                             ),
                           ],
